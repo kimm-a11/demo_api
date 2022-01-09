@@ -1,0 +1,40 @@
+pytest.ini
+# 命令行参数
+addopts = -v --reruns=1 --count=2
+-s:表示输出调试信息，包括print打印的信息
+-v显示更详细的信息
+-vs一起使用
+-n支持多线程或者分布式运行测试用例
+#reruns==number 表示失败用例重跑
+#-x表示只要一个用例报错，那么测试停止运行
+#–maxfail=2 出现两个失败用例停止
+#-k 根据测试用例的部分字符串指定测试用例 pytest -vs test_day2 -k “yang”
+# testpaths指定的路径是以testpaths所在的目录为基准的相对路径
+testpaths = test_case
+
+#更改测试用例收集规则
+
+python_files =  test_*.py  *_test.py
+
+
+#设置xfail_strict = True可以让那些标记为@pytest.mark.xfail但实际通过显示XPASS的测试用例被报告为失败
+xfail_strict = True
+
+requirements
+#生成requirements.txt文件
+pip freeze > requirements.txt
+
+#安装requirements.txt依赖
+pip install -r requirements.txt
+
+#git命令
+git config --global user.name "kimm-a11"
+git config --global user.email "2598614627@qq.com"
+
+
+#执行用例：
+pytest . --alluredir=./report/allure --clean-alluredir
+#生成报告：
+allure generate --clean ./report/allure
+#生成报告并自动打开：
+allure serve ./report/allure
