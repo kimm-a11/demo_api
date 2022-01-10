@@ -2,11 +2,13 @@
 from common.path import *
 import string
 import yaml
+import pytest
 
 
 class ReadConfig:
-    def __init__(self, file_path, name: str):
-        file = os.path.join(file_path, name)
+
+    def __init__(self, path, name: str):
+        file = os.path.join(path, name)
         with open(file, mode='r', encoding='utf-8') as f:
             self.content = yaml.safe_load(f)
 
@@ -18,5 +20,5 @@ class ReadConfig:
 
 
 if __name__ == "__main__":
-    print(ReadConfig(config_path, 'shulie.yaml')('ip'))
+    print(ReadConfig('shulie_demo.yaml')('ip'))
 
